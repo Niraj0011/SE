@@ -1,11 +1,39 @@
 <!DOCTYPE html>
-<html>
-<head><title>My News Portal</title></head>
-<body>
-  <h1>Latest News</h1>
-  {% for article in articles %}
-    <h2><a href="{{ url_for('view_article', articleID=article.articleID) }}">{{ article.title }}</a></h2>
-    <p>{{ article.content[:100] }}...</p>
-  {% endfor %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My News Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+
+  <header class="bg-blue-600 text-white py-6 shadow-md">
+    <div class="max-w-4xl mx-auto px-4">
+      <h1 class="text-4xl font-bold">📰 News Portal</h1>
+      <p class="text-lg text-blue-200">Stay updated with the latest news</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-10 space-y-6">
+    <h2 class="text-2xl font-semibold mb-6">Latest News</h2>
+
+    {% for article in articles %}
+      <div class="bg-white rounded-2xl shadow hover:shadow-lg transition duration-200 p-6">
+        <h3 class="text-xl font-bold text-blue-600 hover:underline">
+          <a href="{{ url_for('view_article', articleID=article.articleID) }}">
+            {{ article.title }}
+          </a>
+        </h3>
+        <p class="text-gray-700 mt-2">{{ article.content[:100] }}...</p>
+      </div>
+    {% endfor %}
+  </main>
+
+  <footer class="text-center py-6 text-sm text-gray-500">
+    &copy; {{ now().year }} News Portal. All rights reserved.
+    <p>Built By: <a href="https://www.github.com/Ramanbaral">Raman Baral</a> , Niraj Shiwakoti, Sangam Gywali</p>
+  </footer>
+
 </body>
 </html>

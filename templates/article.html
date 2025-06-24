@@ -1,17 +1,61 @@
 <!DOCTYPE html>
-<html>
-<head><title>{{ article.title }}</title></head>
-<body>
-  <h1>{{ article.title }}</h1>
-  <p>{{ article.content }}</p>
-  <h3>Comments</h3>
-  {% for comment in comments %}
-    <p>{{ comment.user }}: {{ comment.text }} ({{ comment.postDate.strftime('%Y-%m-%d') }})</p>
-  {% endfor %}
-  <form method="POST" action="{{ url_for('add_comment', articleID=article.articleID) }}">
-    <input type="text" name="user" placeholder="Your name" required>
-    <input type="text" name="text" placeholder="Your comment" required>
-    <button type="submit">Add Comment</button>
-  </form>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ article.title }}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800">
+
+  <!-- Article Card -->
+  <div class="max-w-2xl mx-auto mt-10 p-6 bg-white rounded-2xl shadow-md">
+    <h1 class="text-3xl font-bold mb-4">{{ article.title }}</h1>
+    <p class="text-gray-700 text-lg">{{ article.content }}</p>
+  </div>
+
+  <!-- Comments Section -->
+  <div class="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-2xl shadow-md">
+    <h3 class="text-2xl font-semibold mb-4 text-gray-800">Comments</h3>
+    
+    {% if comments %}
+      <div class="space-y-4 mb-6">
+        {% for comment in comments %}
+          <div class="border rounded-xl p-4 bg-gray-50">
+            <p class="font-medium">{{ comment.user }}</p>
+            <p class="text-gray-700">{{ comment.text }}</p>
+            <p class="text-sm text-gray-500 mt-1">{{ comment.postDate.strftime('%Y-%m-%d') }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-gray-500 italic mb-6">No comments yet. Be the first to comment!</p>
+    {% endif %}
+
+    <!-- Add Comment Form -->
+    <form method="POST" action="{{ url_for('add_comment', articleID=article.articleID) }}" class="space-y-4">
+      <input
+        type="text"
+        name="user"
+        placeholder="Your name"
+        required
+        class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
+      />
+      <textarea
+        name="text"
+        placeholder="Your comment"
+        required
+        rows="4"
+        class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
+      ></textarea>
+      <button
+        type="submit"
+        class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-xl transition duration-200"
+      >
+        Add Comment
+      </button>
+    </form>
+  </div>
+
 </body>
 </html>
