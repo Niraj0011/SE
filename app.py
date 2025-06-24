@@ -31,8 +31,8 @@ class Comment:
 # Load data once on startup
 def load_data():
     global articles, comments
-    file_path_articles = 'c:/Users/ACER/OneDrive/Desktop/SE/articles.csv'
-    file_path_comments = 'c:/Users/ACER/OneDrive/Desktop/SE/comments.csv'
+    file_path_articles = './articles.csv'
+    file_path_comments = './comments.csv'
     try:
         if os.path.exists(file_path_articles):
             with open(file_path_articles, 'r') as file:
@@ -116,7 +116,7 @@ load_data()
 @app.route('/')
 def index():
     print(f"Rendering index with {len(articles)} articles")
-    return render_template('index.html', articles=articles)
+    return render_template('index.html', articles=articles, now=datetime.utcnow)
 
 @app.route('/article/<int:articleID>')
 def view_article(articleID):
