@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head><title>My News Portal</title></head>
+<body>
+  <h1>Latest News</h1>
+  {% for article in articles %}
+    <h2><a href="{{ url_for('view_article', articleID=article.articleID) }}">{{ article.title }}</a></h2>
+    <p>{{ article.content[:100] }}...</p>
+  {% endfor %}
+</body>
+</html>
