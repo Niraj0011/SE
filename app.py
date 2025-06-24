@@ -155,4 +155,4 @@ def add_article():
 if __name__ == '__main__':
     print("Starting app at", datetime.now())
     # My first web app! - Updated on June 23, 2025 at 02:53 AM
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5001)
